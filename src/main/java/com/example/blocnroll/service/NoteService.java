@@ -2,6 +2,7 @@ package com.example.blocnroll.service;
 
 import java.util.Optional;
 
+import com.example.blocnroll.exceptions.OwnerNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.blocnroll.dto.NoteDTO;
@@ -41,30 +42,27 @@ public class NoteService {
         return Optional.empty();
     }
 
-    public Optional<NoteDTO> update(NoteDTO carDTO) {
-        Optional<Note> notefound = noteRepo.findByNotepad(noteDTO.getNotepad());
+    public Optional<NoteDTO> update(NoteDTO noteDTO) {
+        Optional<Note> notefound = noteRepo.findByNotepad(NoteDTO.getNotepad());
         if(notefound.isEmpty()) {
             return Optional.empty();
         }
         Note note = notefound.get();
 
-        if(noteDTO.getColor() != null) {
-            //note.setColor(carDTO.getColor());
+        Note noteUpdated = noteRepo.save(note);
+
+        return Optional.of(new NoteDTO(noteUpdated));
+    }
+
+    public boolean delete(String notepad) {
+        Optional<note> notefound = noteRepo.findByNotepad(notepad);
+        if(notefound.isEmpty()) {
+            return false;
         }
 
-        if(noteDTO.getYear() > 0) {
-            //car.setYear(carDTO.getYear());
-        }
-
-        public boolean delete(String notepad) {
-            Optional<Note> notefound = carRepo.findByNotepad(notepad);
-            if(notefound.isEmpty()) {
-                return false;
-            }
-    
-            NoteRepo.deleteById(notefound.get().getId());
-            return true;
-        }
+        noteRepo.deleteById(notefound.get().getId());
+        return true;
+    }
     
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-
 import com.example.blocnroll.entities.Owner;
 import com.example.blocnroll.entities.Note;
 import com.example.blocnroll.repository.OwnerRepo;

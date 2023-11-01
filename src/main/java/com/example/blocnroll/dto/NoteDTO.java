@@ -16,16 +16,12 @@ public class NoteDTO {
 @NotBlank(message = "A anotação é obrigatória")
     private String notepad;
 
-    private int year;
-    private String color;
-
-    public NoteDTO(note note) {
+    public NoteDTO(Note note) {
         notepad = note.getNotepad();
-        year = note.getYear();
     }
 
-    public note tonote() {
-        return new Note(null, notepad, year, color, null);
+    public Note toNote() {
+        return new Note(null, notepad, null);
     }
 
 }
