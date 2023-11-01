@@ -25,7 +25,7 @@ public class NoteService {
             .orElseThrow(()-> new OwnerNotFoundException("Proprietário da note não existe."));
         
         newNote.setOwner(owner);
-        return NoteRepo.save(newNote);
+        return noteRepo.save(newNote);
     }
 
     public Optional<Note> findById(long id) {
@@ -43,7 +43,7 @@ public class NoteService {
     }
 
     public Optional<NoteDTO> update(NoteDTO noteDTO) {
-        Optional<Note> notefound = noteRepo.findByNotepad(NoteDTO.getNotepad());
+        Optional<Note> notefound = noteRepo.findByNotepad(noteDTO.getNotepad());
         if(notefound.isEmpty()) {
             return Optional.empty();
         }
@@ -55,7 +55,7 @@ public class NoteService {
     }
 
     public boolean delete(String notepad) {
-        Optional<note> notefound = noteRepo.findByNotepad(notepad);
+        Optional<Note> notefound = noteRepo.findByNotepad(notepad);
         if(notefound.isEmpty()) {
             return false;
         }
@@ -65,4 +65,4 @@ public class NoteService {
     }
     
     }
-}
+
