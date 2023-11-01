@@ -21,7 +21,7 @@ import com.example.blocnroll.service.NoteService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Note")
+@RequestMapping("/note")
 
 public class NoteController {
     
